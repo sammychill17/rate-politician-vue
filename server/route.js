@@ -1,7 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const multer = require('multer');
-const { registerUser, loginUser, addPolitician, getPoliticians, searchPoliticians, politicianProfile, ratePolitician } = require('./controllers');
+const { registerUser, loginUser, addPolitician, getPoliticians, searchPoliticians, politicianProfile,politicianReviews, ratePolitician } = require('./controllers');
+
+
+router.get('/politicianReviews/:id', politicianReviews);
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
