@@ -177,5 +177,30 @@ const ratePolitician = async (req, res) => {
     res.status(500).json({ message: 'Internal Server Error' });
   }
 };
+// Reviews of politicians
+const politicianReviews = async (req, res) => {
+  try {
+    const politicianId = req.params.id;
+    // Retrieve politician details from the database based on the provided ID
+    const query = "SELECT pr.rating, "+
+                      "pr.review, "+
+                      "CONCAT(u.first_name,' ',u.last_name) AS full_name,"+
+                      "u.username "+
+                  "FROM politician_ratings pr "+
+                  "JOIN users u ON pr.user_id = u.id "+
+                  "WHERE pr.politician_id = ?";
+
+    const reviews = await executeQuery(query, [politicianId]);
+
+    if (!reviews) {
+      return res.status(404).json({ message: 'Reviews not found' });
+    }
+
+    res.status(200).json(reviews);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+};
 
 module.exports = { registerUser, loginUser, addPolitician, getPoliticians, searchPoliticians, politicianProfile, ratePolitician };
