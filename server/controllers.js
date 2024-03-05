@@ -203,4 +203,4 @@ const politicianReviews = async (req, res) => {
   }
 };
 
-module.exports = { registerUser, loginUser, addPolitician, getPoliticians, searchPoliticians, politicianProfile, ratePolitician };
+module.exports = { registerUser, loginUser, addPolitician, getPoliticians, searchPoliticians, politicianProfile, politicianReviews,ratePolitician };
